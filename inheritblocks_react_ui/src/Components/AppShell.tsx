@@ -153,14 +153,14 @@ function AppShellExample() {
             <Route path="/CalendarExample" element={<CalendarExample/>}></Route>
             <Route path="/TimeInputExample" element={<TimeInputExample/>}></Route>
             <Route path="/ShowNotificationExample" element={<ShowNotificationExample/>}></Route>
-            <Route path="/TableExample" element={<TableExample/>}></Route>
+            
             <Route path="/TitleAndTextExample" element={<TitleAndTextExample/>}></Route>
             <Route path="/Buttons" element={<Buttons/>}></Route>
             <Route path="/wagmiTest" element={<WagmiTest/>}></Route>
             <Route path="/ManageAssetsTable" element={<ManageAssetsTable/>}></Route>
             <Route path="/ManageWillsTable" element={<ManageWillsTable/>}></Route>
             
-            ManageAssetsTable
+            
 
             {/* <Route path="/manageAssetsTable" element={<manageAssetsTable/>}></Route>
             <Route path="/manageWillsTable" element={<manageWillsTable/>}></Route> */}
