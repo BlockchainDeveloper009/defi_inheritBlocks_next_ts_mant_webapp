@@ -10,8 +10,9 @@ import { alchemyProvider } from 'wagmi/providers/alchemy'
 import { infuraProvider } from 'wagmi/providers/infura'
 import SendTransaction from './SendTransaction'
 import MintNFT from './MintNFT'
+import MintNFTForm from './MintNFTForm'
 //import { logWarn } from './logger'
-const yourAlchemyApiKey = 'xx';
+const yourAlchemyApiKey = '3b2s_ycI-VRJbbV-stREOv_x1w3XC5LQ';
 
 const { provider, webSocketProvider } = configureChains(
   [polygon, goerli, polygonMumbai, localhost],
@@ -40,6 +41,8 @@ function WagmiTest() {
         <SendTransaction />
         -------------------
         <MintNFT/>
+        -------------------
+        <MintNFTForm />
         -------------------
        </WagmiConfig>
     );

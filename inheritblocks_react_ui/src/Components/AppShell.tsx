@@ -29,6 +29,7 @@ import Buttons from './Buttons';
 import ManageAssetsTable from './ManageAssetsTable';
 import ManageWillsTable from './ManageWillsTable';
 import WagmiTest from './WagmiTest';
+import FormExample from './FormExample';
 
 
 const Applicationfooter = "2022 all copyright resverved to Inhert Blocks"
@@ -96,6 +97,9 @@ function AppShellExample() {
                 <Text component={Link}  variant="link" to="/wagmiTest">
                 wagmiTest
                 </Text>
+                <Text component={Link}  variant="link" to="/FormExample">
+                FormExample
+                </Text>
                 
                 
                 
@@ -159,6 +163,8 @@ function AppShellExample() {
             <Route path="/wagmiTest" element={<WagmiTest/>}></Route>
             <Route path="/ManageAssetsTable" element={<ManageAssetsTable/>}></Route>
             <Route path="/ManageWillsTable" element={<ManageWillsTable/>}></Route>
+            <Route path="/FormExample" element={<FormExample/>}></Route>
+            
             
             
 

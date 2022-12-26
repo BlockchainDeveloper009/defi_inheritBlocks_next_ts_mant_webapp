@@ -60,7 +60,11 @@ function Registration() {
 
         <Input
         component="select" />
-      </div>
+      
+      
+
+
+    </div>
   );
 }
 
