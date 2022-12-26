@@ -30,6 +30,8 @@ import ManageAssetsTable from './ManageAssetsTable';
 import ManageWillsTable from './ManageWillsTable';
 import WagmiTest from './WagmiTest';
 import FormExample from './FormExample';
+import CreateAssetsForm from './CreateAssetsForm';
+import CreateWillssForm from './CreateWillssForm';
 
 
 const Applicationfooter = "2022 all copyright resverved to Inhert Blocks"
@@ -61,6 +63,9 @@ function AppShellExample() {
             <div style={{display: "flex", flexDirection: "column"}}>
                 <Text component={Link}  variant="link" to="/">
                    Home Page
+                </Text>
+                <Text component={Link}  variant="link" to="/FormExample">
+                FormExample
                 </Text>
                 <Text component={Link}  variant="link" to="/input">
                    Input Example
@@ -97,9 +102,13 @@ function AppShellExample() {
                 <Text component={Link}  variant="link" to="/wagmiTest">
                 wagmiTest
                 </Text>
-                <Text component={Link}  variant="link" to="/FormExample">
-                FormExample
+                <Text component={Link}  variant="link" to="/CreateWillsForm">
+                CreateWillsForm
                 </Text>
+                <Text component={Link}  variant="link" to="/CreateAssetsForm">
+                CreateAssetsForm
+                </Text>
+                
                 
                 
                 
@@ -164,10 +173,9 @@ function AppShellExample() {
             <Route path="/ManageAssetsTable" element={<ManageAssetsTable/>}></Route>
             <Route path="/ManageWillsTable" element={<ManageWillsTable/>}></Route>
             <Route path="/FormExample" element={<FormExample/>}></Route>
+            <Route path="/CreateAssetsForm" element={<CreateAssetsForm/>}></Route>
+            <Route path="/CreateWillssForm" element={<CreateWillssForm/>}></Route>
             
-            
-            
-
             {/* <Route path="/manageAssetsTable" element={<manageAssetsTable/>}></Route>
             <Route path="/manageWillsTable" element={<manageWillsTable/>}></Route> */}
 

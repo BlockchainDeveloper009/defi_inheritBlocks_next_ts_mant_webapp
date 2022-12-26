@@ -11,7 +11,7 @@ import {
   CreateBondandAdminRole_CONTRACT_ADDRESS,
 } from "../../constants";
 
-function FormExample() {
+function CreateAssetsForm() {
 
 
 
@@ -19,15 +19,13 @@ function FormExample() {
 
   const form = useForm({
     initialValues: {
-      firstName: 'Jane',
-      lastName: 'Doe',
-      age: '33',
-      AssetId: '1'
+      assetName: 'asset',
+      Amount: '0'
     },
 
     transformValues: (values) => ({
-      fullName: `${values.firstName} ${values.AssetId}`,
-      age: Number(values.age) || 0,
+      AssetName: `${values.assetName}`,
+      Amount: Number(values.Amount) || 0,
     }),
   });
 
@@ -37,25 +35,11 @@ function FormExample() {
         onSubmit={form.onSubmit((values) => setSubmittedValues(JSON.stringify(values, null, 2)))}
       >
         <TextInput
-          label="First name"
-          placeholder="First name"
-          {...form.getInputProps('firstName')}
+          label="Asset name"
+          placeholder="Asset name"
+          {...form.getInputProps('assetName')}
         />
-        <TextInput
-          type="number"
-          label="AssetId"
-          placeholder="AssetId"
-          mt="md"
-          {...form.getInputProps('AssetId')}
-        />
-        <TextInput
-          type="number"
-          label="Benefitor"
-          placeholder="Address"
-          mt="md"
-          {...form.getInputProps('Benefitor')}
-        />
-
+       
         <TextInput
           type="number"
           label="Amount"
@@ -74,4 +58,4 @@ function FormExample() {
   );
 }
 
-export default FormExample;
+export default CreateAssetsForm;

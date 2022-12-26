@@ -11,7 +11,7 @@ import {
   CreateBondandAdminRole_CONTRACT_ADDRESS,
 } from "../../constants";
 
-function FormExample() {
+function CreateWillsForm() {
 
 
 
@@ -19,15 +19,17 @@ function FormExample() {
 
   const form = useForm({
     initialValues: {
-      firstName: 'Jane',
-      lastName: 'Doe',
-      age: '33',
+      willStartDate: 'Jane',
+      willEndDate: 'Doe',
+      Benefitor: '0x',
       AssetId: '1'
     },
 
     transformValues: (values) => ({
-      fullName: `${values.firstName} ${values.AssetId}`,
-      age: Number(values.age) || 0,
+      AssetId: `${values.AssetId}`,
+      willStartDate: `${values.willStartDate}`,
+      willEndDate: `${values.willEndDate}`,
+      Benefitor: Number(values.Benefitor) || 0,
     }),
   });
 
@@ -36,11 +38,7 @@ function FormExample() {
       <form
         onSubmit={form.onSubmit((values) => setSubmittedValues(JSON.stringify(values, null, 2)))}
       >
-        <TextInput
-          label="First name"
-          placeholder="First name"
-          {...form.getInputProps('firstName')}
-        />
+
         <TextInput
           type="number"
           label="AssetId"
@@ -49,19 +47,21 @@ function FormExample() {
           {...form.getInputProps('AssetId')}
         />
         <TextInput
+          label="Will Start Date"
+          placeholder="Start Date"
+          {...form.getInputProps('willStartDate')}
+        />
+        <TextInput
+          label="Will End Date"
+          placeholder="End Date"
+          {...form.getInputProps('willEndDate')}
+        />
+        <TextInput
           type="number"
           label="Benefitor"
           placeholder="Address"
           mt="md"
           {...form.getInputProps('Benefitor')}
-        />
-
-        <TextInput
-          type="number"
-          label="Amount"
-          placeholder="Amt"
-          mt="md"
-          {...form.getInputProps('Amount')}
         />
 
         <Button type="submit" mt="md">
@@ -74,4 +74,4 @@ function FormExample() {
   );
 }
 
-export default FormExample;
+export default CreateWillsForm;
