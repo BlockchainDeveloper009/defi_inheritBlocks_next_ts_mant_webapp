@@ -31,7 +31,7 @@ import ManageWillsTable from './ManageWillsTable';
 import WagmiTest from './WagmiTest';
 import FormExample from './FormExample';
 import CreateAssetsForm from './CreateAssetsForm';
-import CreateWillssForm from './CreateWillssForm';
+import CreateWillsForm from './CreateWillsForm';
 
 
 const Applicationfooter = "2022 all copyright resverved to Inhert Blocks"
@@ -67,10 +67,18 @@ function AppShellExample() {
                 <Text component={Link}  variant="link" to="/FormExample">
                 FormExample
                 </Text>
+                <Text component={Link}  variant="link" to="/CreateWillsForm">
+                CreateWillsForm
+                </Text>
+                <Text component={Link}  variant="link" to="/CreateAssetsForm">
+                CreateAssetsForm
+                </Text>
                 <Text component={Link}  variant="link" to="/input">
                    Input Example
                 </Text>
-      
+                <Text component={Link}  variant="link" to="/wagmiTest">
+                wagmiTest
+                </Text>
                 <Text component={Link}  variant="link" to="/ManageWillsTable">
                   ManageWillsTable
                 </Text>
@@ -99,15 +107,8 @@ function AppShellExample() {
                 <Text component={Link}  variant="link" to="/Buttons">
                 Buttons
                 </Text>
-                <Text component={Link}  variant="link" to="/wagmiTest">
-                wagmiTest
-                </Text>
-                <Text component={Link}  variant="link" to="/CreateWillsForm">
-                CreateWillsForm
-                </Text>
-                <Text component={Link}  variant="link" to="/CreateAssetsForm">
-                CreateAssetsForm
-                </Text>
+                
+          
                 
                 
                 
@@ -166,15 +167,15 @@ function AppShellExample() {
             <Route path="/CalendarExample" element={<CalendarExample/>}></Route>
             <Route path="/TimeInputExample" element={<TimeInputExample/>}></Route>
             <Route path="/ShowNotificationExample" element={<ShowNotificationExample/>}></Route>
-            
+            <Route path="/wagmiTest" element={<WagmiTest/>}></Route>
             <Route path="/TitleAndTextExample" element={<TitleAndTextExample/>}></Route>
             <Route path="/Buttons" element={<Buttons/>}></Route>
-            <Route path="/wagmiTest" element={<WagmiTest/>}></Route>
+            
             <Route path="/ManageAssetsTable" element={<ManageAssetsTable/>}></Route>
             <Route path="/ManageWillsTable" element={<ManageWillsTable/>}></Route>
             <Route path="/FormExample" element={<FormExample/>}></Route>
             <Route path="/CreateAssetsForm" element={<CreateAssetsForm/>}></Route>
-            <Route path="/CreateWillssForm" element={<CreateWillssForm/>}></Route>
+            <Route path="/CreateWillsForm" element={<CreateWillsForm/>}></Route>
             
             {/* <Route path="/manageAssetsTable" element={<manageAssetsTable/>}></Route>
             <Route path="/manageWillsTable" element={<manageWillsTable/>}></Route> */}

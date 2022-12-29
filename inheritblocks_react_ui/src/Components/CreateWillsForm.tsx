@@ -19,8 +19,8 @@ function CreateWillsForm() {
 
   const form = useForm({
     initialValues: {
-      willStartDate: 'Jane',
-      willEndDate: 'Doe',
+      willStartDate: '',
+      willEndDate: '',
       Benefitor: '0x',
       AssetId: '1'
     },
@@ -48,18 +48,18 @@ function CreateWillsForm() {
         />
         <TextInput
           label="Will Start Date"
-          placeholder="Start Date"
+          placeholder="MM-DD-YYYY"
           {...form.getInputProps('willStartDate')}
         />
         <TextInput
           label="Will End Date"
-          placeholder="End Date"
+          placeholder="MM-DD-YYYY"
           {...form.getInputProps('willEndDate')}
         />
         <TextInput
           type="number"
           label="Benefitor"
-          placeholder="Address"
+          placeholder="0x Address"
           mt="md"
           {...form.getInputProps('Benefitor')}
         />

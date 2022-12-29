@@ -11,6 +11,8 @@ import { infuraProvider } from 'wagmi/providers/infura'
 import SendTransaction from './SendTransaction'
 import MintNFT from './MintNFT'
 import MintNFTForm from './MintNFTForm'
+import CreateAssetsForm from './CreateAssetsForm'
+import CreateWillsForm from './CreateWillsForm'
 //import { logWarn } from './logger'
 const yourAlchemyApiKey = '3b2s_ycI-VRJbbV-stREOv_x1w3XC5LQ';
 
@@ -38,6 +40,12 @@ function WagmiTest() {
         <Profile/>
         -------------------
 
+        <CreateAssetsForm/>
+
+        ------------------
+
+        <CreateWillsForm/>
+
         <SendTransaction />
         -------------------
         <MintNFT/>
@@ -45,6 +53,8 @@ function WagmiTest() {
         <MintNFTForm />
         -------------------
        </WagmiConfig>
+
+
     );
   }
   
