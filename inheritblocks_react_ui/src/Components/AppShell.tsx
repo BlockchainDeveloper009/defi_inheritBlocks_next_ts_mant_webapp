@@ -106,13 +106,7 @@ function AppShellExample() {
                 </Text>
                 <Text component={Link}  variant="link" to="/Buttons">
                 Buttons
-                </Text>
-                
-          
-                
-                
-                
-                
+                </Text>    
             </div>
            
 
