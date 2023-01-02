@@ -1,28 +1,62 @@
-import { ActionIcon, useMantineColorScheme } from '@mantine/core';
+import { ActionIcon, Loader, Select, useMantineColorScheme } from '@mantine/core';
 import { IconSun, IconMoonStars } from '@tabler/icons';
 
 import { useState } from 'react';
 import { useForm } from '@mantine/form';
 import { TextInput, Button, Box, Code } from '@mantine/core';
 
-import { useContract, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi'
+import { useAccount, useContract, useContractRead, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi'
 import {
  
   CreateBondandAdminRole_CONTRACT_ABI,
   CreateBondandAdminRole_CONTRACT_ADDRESS,
 } from "../srcConstants";
 
+function GetAllAssets(stttt:any):[] {
+  const { data,status} = useContractRead({
+    address: CreateBondandAdminRole_CONTRACT_ADDRESS,
+    abi: CreateBondandAdminRole_CONTRACT_ABI,
+    functionName: 'getAllAsset',
+    
+  })
+  console.log('---------')
+  console.log(data)
+  console.log('----getAllAssets-----')
+  console.log(stttt)
+  console.log('---------')
+  return data;
+}
+function GetWillsByUsers(stttt:any) {
+  const { data,status} = useContractRead({
+    address: CreateBondandAdminRole_CONTRACT_ADDRESS,
+    abi: CreateBondandAdminRole_CONTRACT_ABI,
+    functionName: 'getUserCreatedBonds',
+    args: [stttt]
+    
+  })
+  console.log('---------')
+  
+  console.log('---getUserCreatedBonds-----')
+  console.log(data)
+  console.log('---------')
+  return data;
+}
 function CreateWillsForm() {
 
-
-   const [assetId, setAssetId] = useState('');
+  
+  const { address, connector, isConnected } = useAccount()
+  const [assetId, setAssetId] = useState<string|null>(null);
   const [willStartDate, setWillStartDate] = useState('');
   const [willEndDate, setWillEndDate] = useState('');
   const [benefitorAddr, setbenefitorAddr] = useState('');
 
 
   const [submittedValues, setSubmittedValues] = useState('');
+  
 
+  const assetIds = async () => {
+    console.log(assetIds)
+  }
   const form = useForm({
     initialValues: {
       willStartDate: '',
@@ -38,6 +72,12 @@ function CreateWillsForm() {
       Benefitor: `${values.Benefitor}`,
     }),
   });
+  // const { data:Result, error:Error ,isError:boolean, status} = useContractRead({
+  //   address: CreateBondandAdminRole_CONTRACT_ADDRESS,
+  //   abi: CreateBondandAdminRole_CONTRACT_ABI,
+  //   functionName: 'checkAssetisAvailable',
+  //   args: [assetId],
+  // })
 
    const { 
     config,
@@ -53,7 +93,10 @@ function CreateWillsForm() {
   const { isLoading, isSuccess } = useWaitForTransaction({
     hash: data?.hash,
   })
-
+  let assets =[] 
+  assets = GetAllAssets(address)
+  const wills = GetWillsByUsers(address)
+  const willDatas = Array(50).fill(0).map((_, index) => `Item ${index}`);
   return (
     <Box sx={{ maxWidth: 400 }} mx="auto">
       <form
@@ -73,16 +116,43 @@ function CreateWillsForm() {
           label="AssetId"
           placeholder="AssetId"
           mt="md"
+          withAsterisk
           {...form.getInputProps('AssetId')}
+          // rightSection={<Loader size="xs" />}
+          
+          // onBlur={(event) => ValidateUserAssetId(event.currentTarget.value)}
         />
+        <Select 
+          label="Your fav"
+          placeholder="ca-01"
+          value={assetId}
+          onChange={setAssetId}
+          data= {
+            [
+              { value: 'react', label: 'React'},
+              { value: 'ng', label: 'Angular'},
+              { value: 'vie', label: 'Vue'},
+            ]
+          }
+        />
+        <Select 
+          label="Wills"
+          placeholder="ca-01"
+          value={assetId}
+          onChange={setAssetId}
+          data= {[assets]}
+        />
+
         <TextInput
           label="Will Start Date"
           placeholder="MM-DD-YYYY"
+          withAsterisk
           {...form.getInputProps('willStartDate')}
         />
         <TextInput
           label="Will End Date"
           placeholder="MM-DD-YYYY"
+          withAsterisk
           {...form.getInputProps('willEndDate')}
         />
         <TextInput
@@ -90,6 +160,7 @@ function CreateWillsForm() {
           label="Benefitor"
           placeholder="0x Address"
           mt="md"
+          withAsterisk
           {...form.getInputProps('Benefitor')}
         />
 
@@ -116,6 +187,8 @@ function CreateWillsForm() {
       </form>
 
       {submittedValues && <Code block>{submittedValues}</Code>}
+
+
     </Box>
   );
 }

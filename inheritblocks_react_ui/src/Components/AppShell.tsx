@@ -32,6 +32,8 @@ import WagmiTest from './WagmiTest';
 import FormExample from './FormExample';
 import CreateAssetsForm from './CreateAssetsForm';
 import CreateWillsForm from './CreateWillsForm';
+import WagmiAssetForm from './wagmiAssetForm';
+import WagmiWillsForm from './wagmiWillsForm';
 
 
 const Applicationfooter = "2022 all copyright resverved to Inhert Blocks"
@@ -64,8 +66,11 @@ function AppShellExample() {
                 <Text component={Link}  variant="link" to="/">
                    Home Page
                 </Text>
-                <Text component={Link}  variant="link" to="/FormExample">
-                FormExample
+                <Text component={Link}  variant="link" to="/WagmiWillsForm">
+                  wagmiWillsForm
+                </Text>
+                <Text component={Link}  variant="link" to="/WagmiAssetForm">
+                WagmiAssetForm
                 </Text>
                 <Text component={Link}  variant="link" to="/CreateWillsForm">
                 CreateWillsForm
@@ -155,6 +160,8 @@ function AppShellExample() {
     >
         <Routes>
             <Route path="/" element={<ChipsExample/>}></Route>
+            <Route path="/WagmiAssetForm" element={<WagmiAssetForm/>}></Route>
+            <Route path="/wagmiWillsForm" element={<WagmiWillsForm/>}></Route>
             <Route path="/input" element={<Registration/>}></Route>
             <Route path="/ChipsExample" element={<ChipsExample/>}></Route>
             <Route path="/cardsPage" element={<Cards/>}></Route>

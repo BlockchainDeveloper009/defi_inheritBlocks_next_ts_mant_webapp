@@ -4,7 +4,7 @@ import { IconSun, IconMoonStars } from '@tabler/icons';
 import { useState } from 'react';
 import { useForm } from '@mantine/form';
 import { TextInput, Button, Box, Code } from '@mantine/core';
-import { useContract, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi'
+import { useContract, useContractEvent, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi'
 import {
  
   CreateBondandAdminRole_CONTRACT_ABI,
@@ -40,7 +40,36 @@ function CreateAssetsForm() {
       
     }),
   });
-  
+  function AssetCreationEvent() {
+    useContractEvent({
+      address: CreateBondandAdminRole_CONTRACT_ADDRESS,
+      abi: CreateBondandAdminRole_CONTRACT_ABI,
+      eventName: 'willCreated',
+      listener(node, label, owner) {
+        console.log(node, label, owner)
+      },
+    })
+  }
+  function WillCreationEvent() {
+    useContractEvent({
+      address: CreateBondandAdminRole_CONTRACT_ADDRESS,
+      abi: CreateBondandAdminRole_CONTRACT_ABI,
+      eventName: 'willCreated',
+      listener(willofPropertyName, willStartDate, willMaturityDate,cryptoWillId) {
+        console.log(willofPropertyName, willStartDate, willMaturityDate,cryptoWillId)
+      },
+    })
+  }
+  function WillSettlementEvent() {
+    useContractEvent({
+      address: CreateBondandAdminRole_CONTRACT_ADDRESS,
+      abi: CreateBondandAdminRole_CONTRACT_ABI,
+      eventName: 'willSettled',
+      listener(cryptoWillId, benefitor, willMaturityDate, willAmount) {
+        console.log(cryptoWillId, benefitor, willMaturityDate, willAmount)
+      },
+    })
+  }
   const { 
     config,
     error: prepareError,
