@@ -33,14 +33,15 @@ const client = createClient({
 })
 
 function WagmiWillsForm() {
-
-
+  const { address, connector, isConnected } = useAccount()
+ 
     return (
       <WagmiConfig client={client}>
         <Profile/>
         -------------------
-
         <CreateWillsForm/>
+        
+        
 
         ------------------
        </WagmiConfig>

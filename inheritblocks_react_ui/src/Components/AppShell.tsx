@@ -36,7 +36,7 @@ import WagmiAssetForm from './wagmiAssetForm';
 import WagmiWillsForm from './wagmiWillsForm';
 
 
-const Applicationfooter = "2022 all copyright resverved to Inhert Blocks"
+const Applicationfooter = "2022 all copyright resverved to Inherit Blocks"
 function AppShellExample() {
     const theme = useMantineTheme();
     const [opened, setOpened] = useState(false);

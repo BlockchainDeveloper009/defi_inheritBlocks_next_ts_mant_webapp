@@ -10,11 +10,41 @@ import Header from './Components/Header';
 import AppShellExample from './Components/AppShell';
 
 import '@rainbow-me/rainbowkit/styles.css';
-
+import { WagmiConfig , useAccount, useConnect, useEnsName } from 'wagmi'
+import { InjectedConnector } from 'wagmi/connectors/injected'
+import { createClient, configureChains, mainnet, goerli  } from 'wagmi'
+import { publicProvider } from 'wagmi/providers/public'
+import { polygon, polygonMumbai, hardhat, localhost } from 'wagmi/chains'
+import { alchemyProvider } from 'wagmi/providers/alchemy'
+import { infuraProvider } from 'wagmi/providers/infura'
+import '@rainbow-me/rainbowkit/styles.css';
+import {
+  getDefaultWallets,
+  RainbowKitProvider,
+} from '@rainbow-me/rainbowkit';  
 
 //import { createStylesServer, ServerStyles } from '@mantine/ssr';
+const yourAlchemyApiKey = '3b2s_ycI-VRJbbV-stREOv_x1w3XC5LQ';
 
+const { chains, provider, webSocketProvider } = configureChains(
+  [polygon, goerli, polygonMumbai, localhost],
+  [
+    // priority =0, first rpc provider will be tried, after stallTimeout, will move to next RPC provider
+    alchemyProvider({ apiKey: yourAlchemyApiKey, priority: 0, stallTimeout: 1_000 }), 
 
+    infuraProvider({ apiKey: 'yourInfuraApiKey', priority: 1 }),
+    publicProvider()],
+)
+
+const { connectors } = getDefaultWallets({
+  appName: 'My RainbowKit App',
+  chains
+});
+const client = createClient({
+  provider,
+  webSocketProvider,
+  
+})
 function App() {
   const [colorScheme, setColorScheme] = useState<ColorScheme>('light');
   const toggleColorScheme = (value?: ColorScheme) => setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
@@ -26,6 +56,7 @@ function App() {
         <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={    toggleColorScheme} > 
             <MantineProvider theme={{colorScheme}}>
               <Paper radius={0} style = {{minHeight: "100vh"}}>
+              <WagmiConfig client={client}>
                 <AppShellExample/>
                 
                 
@@ -33,7 +64,7 @@ function App() {
                 
                 <Buttons/>
   
-                
+                </WagmiConfig>
               </Paper>
             </MantineProvider>
         </ColorSchemeProvider>

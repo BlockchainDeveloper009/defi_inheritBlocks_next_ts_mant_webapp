@@ -1,6 +1,36 @@
 import { Table } from '@mantine/core';
+import { useAccount, useContract, useContractRead, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi'
+
+import {
+ 
+  CreateBondandAdminRole_CONTRACT_ABI,
+  CreateBondandAdminRole_CONTRACT_ADDRESS,
+} from "../srcConstants";
+interface ff{
+  
+}
+function GetWillsByUsers(stttt:any) {
+  const { data:functionData,status} = useContractRead({
+    address: CreateBondandAdminRole_CONTRACT_ADDRESS,
+    abi: CreateBondandAdminRole_CONTRACT_ABI,
+    functionName: 'getUserCreatedBonds',
+    args: [stttt]
+    
+  })
+  console.log('---------')
+  
+  console.log('---getUserCreatedBonds-----')
+  console.log(functionData as Array<string>)
+  let retData = functionData as Array<string>;
+  console.log(retData)
+  return retData 
+  
+}
 
 function ManageWillsTable() {
+  const { address, connector, isConnected } = useAccount()
+  GetWillsByUsers(address)
+   
     const elements = [
         { position: 6, mass: 12.011, symbol: 'C', name: 'Carbon' },
         { position: 7, mass: 14.007, symbol: 'N', name: 'Nitrogen' },

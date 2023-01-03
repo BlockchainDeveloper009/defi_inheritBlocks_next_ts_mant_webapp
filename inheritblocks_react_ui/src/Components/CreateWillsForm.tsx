@@ -11,36 +11,26 @@ import {
   CreateBondandAdminRole_CONTRACT_ABI,
   CreateBondandAdminRole_CONTRACT_ADDRESS,
 } from "../srcConstants";
+import { contractConfig } from "../Config";
 
-function GetAllAssets(stttt:any):[] {
-  const { data,status} = useContractRead({
+function GetAllAssets(stttt:any):Array<string> {
+  const { data: functionData ,status} = useContractRead({
     address: CreateBondandAdminRole_CONTRACT_ADDRESS,
     abi: CreateBondandAdminRole_CONTRACT_ABI,
     functionName: 'getAllAsset',
     
   })
-  console.log('---------')
-  console.log(data)
-  console.log('----getAllAssets-----')
-  console.log(stttt)
-  console.log('---------')
-  return data;
-}
-function GetWillsByUsers(stttt:any) {
-  const { data,status} = useContractRead({
-    address: CreateBondandAdminRole_CONTRACT_ADDRESS,
-    abi: CreateBondandAdminRole_CONTRACT_ABI,
-    functionName: 'getUserCreatedBonds',
-    args: [stttt]
-    
-  })
-  console.log('---------')
   
-  console.log('---getUserCreatedBonds-----')
-  console.log(data)
   console.log('---------')
-  return data;
+  console.log(functionData)
+  console.log('----getAllAssets-----')
+  console.log(functionData as Array<string>)
+  let retData = functionData as Array<string>;
+  console.log(retData)
+  return retData
 }
+
+
 function CreateWillsForm() {
 
   
@@ -52,7 +42,7 @@ function CreateWillsForm() {
 
 
   const [submittedValues, setSubmittedValues] = useState('');
-  
+
 
   const assetIds = async () => {
     console.log(assetIds)
@@ -62,7 +52,11 @@ function CreateWillsForm() {
       willStartDate: '',
       willEndDate: '',
       Benefitor: '0x',
-      AssetId: '1'
+      AssetId: '1',
+      // AssetId: [
+      //   { name: 'Banana', available: true },
+      //   { name: 'Orange', available: false },
+      // ],
     },
 
     transformValues: (values) => ({
@@ -93,13 +87,24 @@ function CreateWillsForm() {
   const { isLoading, isSuccess } = useWaitForTransaction({
     hash: data?.hash,
   })
-  let assets =[] 
+  let assets;
+  let wills;
   assets = GetAllAssets(address)
-  const wills = GetWillsByUsers(address)
+  if(assets.length>=0 ){
+    console.log('---assets---')
+    console.log(assets)
+    console.log('--------------')
+  } else { 
+    assets.push('testData')
+  }
+  //wills = GetWillsByUsers(address)
+  
   const willDatas = Array(50).fill(0).map((_, index) => `Item ${index}`);
   return (
     <Box sx={{ maxWidth: 400 }} mx="auto">
-      <form
+      
+    
+        <form
         onSubmit={form.onSubmit((values) => {
           setSubmittedValues(JSON.stringify(values, null, 2))
           setAssetId(values.AssetId)
@@ -121,27 +126,19 @@ function CreateWillsForm() {
           // rightSection={<Loader size="xs" />}
           
           // onBlur={(event) => ValidateUserAssetId(event.currentTarget.value)}
+          onError=""
         />
         <Select 
           label="Your fav"
           placeholder="ca-01"
           value={assetId}
           onChange={setAssetId}
-          data= {
-            [
-              { value: 'react', label: 'React'},
-              { value: 'ng', label: 'Angular'},
-              { value: 'vie', label: 'Vue'},
-            ]
-          }
+          data = {assets}
+          //{[{value:'testData'}]}
+          //assets.length>=0 ? assets : [{value:'testData'}]   
+          
         />
-        <Select 
-          label="Wills"
-          placeholder="ca-01"
-          value={assetId}
-          onChange={setAssetId}
-          data= {[assets]}
-        />
+       
 
         <TextInput
           label="Will Start Date"
@@ -185,12 +182,14 @@ function CreateWillsForm() {
       )}
 
       </form>
-
+     
       {submittedValues && <Code block>{submittedValues}</Code>}
 
 
     </Box>
   );
+
+ 
 }
 
 export default CreateWillsForm;

@@ -26,7 +26,8 @@ function Profile() {
     return (
       <div>
         {/* <img src={ensAvatar} alt="ENS Avatar" /> */}
-        <div>{ensName ? `${ensName} (${address})` : address}</div>
+        {/* <div>{ensName ? `${ensName} (${address})` : address}</div> */}
+        <div>{address}</div>
         {/* <div>Connected to {connector.name}</div> */}
         <button onClick={()=>disconnect}>Disconnect</button>
       </div>
