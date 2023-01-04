@@ -37,7 +37,7 @@ function WagmiAssetForm() {
 
     return (
       <WagmiConfig client={client}>
-        <Profile/>
+        
         -------------------
 
         <CreateAssetsForm/>

@@ -34,14 +34,56 @@ import CreateAssetsForm from './CreateAssetsForm';
 import CreateWillsForm from './CreateWillsForm';
 import WagmiAssetForm from './wagmiAssetForm';
 import WagmiWillsForm from './wagmiWillsForm';
-
+import { InjectedConnector } from 'wagmi/connectors/injected'
+import { useAccount, useConnect, useDisconnect } from 'wagmi';
 
 const Applicationfooter = "2022 all copyright resverved to Inherit Blocks"
 function AppShellExample() {
     const theme = useMantineTheme();
     const [opened, setOpened] = useState(false);
 
-    
+    const { connect, connectors, error, isLoading, pendingConnector } = useConnect({
+      connector: new InjectedConnector({
+        options: {
+          shimDisconnect: false,
+        },
+      }),
+    })
+    const { address, connector, isConnected } = useAccount()
+    const { disconnect } = useDisconnect()
+    const WalletHandler = () => {
+      if (isConnected) 
+      {
+        return (
+          <div>
+            {/* <img src={ensAvatar} alt="ENS Avatar" /> */}
+            {/* <div>{ensName ? `${ensName} (${address})` : address}</div> */}
+            <div>{address}</div>
+            {/* <div>Connected to {connector.name}</div> */}
+            <button onClick={()=>disconnect}>Disconnect</button>
+          </div>
+        )
+      }
+      return (
+        <div>
+          {connectors.map((connector) => (
+            <button
+              disabled={!connector.ready}
+              key={connector.id}
+              onClick={() => connect({ connector })}
+            >
+              {connector.name}
+              {!connector.ready && ' (unsupported)'}
+              {isLoading &&
+                connector.id === pendingConnector?.id &&
+                ' (connecting)'}
+            </button>
+          ))}
+     
+          {error && <div>{error.message}</div>}
+        </div>
+      )
+    }
 
   return (
     <div className="App">
@@ -72,12 +114,7 @@ function AppShellExample() {
                 <Text component={Link}  variant="link" to="/WagmiAssetForm">
                 WagmiAssetForm
                 </Text>
-                <Text component={Link}  variant="link" to="/CreateWillsForm">
-                CreateWillsForm
-                </Text>
-                <Text component={Link}  variant="link" to="/CreateAssetsForm">
-                CreateAssetsForm
-                </Text>
+             
                 <Text component={Link}  variant="link" to="/input">
                    Input Example
                 </Text>
@@ -152,7 +189,13 @@ function AppShellExample() {
             <Text>AboutUs</Text>
             <Text>ContactUs</Text>
             <Text>FAQ</Text>
-            <Text>Wagmi Wallet Connection</Text>
+            <Text>
+              {
+
+                WalletHandler()
+              
+              
+              }</Text>
 
           </div>
         </Header>
@@ -176,7 +219,7 @@ function AppShellExample() {
             <Route path="/ManageWillsTable" element={<ManageWillsTable/>}></Route>
             <Route path="/FormExample" element={<FormExample/>}></Route>
             <Route path="/CreateAssetsForm" element={<CreateAssetsForm/>}></Route>
-            <Route path="/CreateWillsForm" element={<CreateWillsForm/>}></Route>
+            {/* <Route path="/CreateWillsForm" element={<CreateWillsForm/>}></Route> */}
             
             {/* <Route path="/manageAssetsTable" element={<manageAssetsTable/>}></Route>
             <Route path="/manageWillsTable" element={<manageWillsTable/>}></Route> */}

@@ -164,18 +164,19 @@ function CreateWillsForm() {
         <Button type="submit" mt="md">
           Submit
         </Button>
-         {isSuccess && (
-        <div>
-          Successfully created Will, check here!!
-          <div>
-            <a href={`https://mumbai.polygonscan.com/tx/${data?.hash}`}>Polygon Scan</a>
-          </div>
-          <div>
-            <a href={`https://etherscan.io/tx/${data?.hash}`}>Etherscan</a>
-          </div>
-          
-        </div>
-      )}
+        {isSuccess && (
+                <div>
+                  Successfully created Will, check here!!
+                  <div>
+                    <a href={`https://mumbai.polygonscan.com/tx/${data?.hash}`}>Polygon Scan</a>
+                  </div>
+                  <div>
+                    <a href={`https://etherscan.io/tx/${data?.hash}`}>Etherscan</a>
+                  </div>
+                  
+                </div>
+          )
+        }
 
       {(isPrepareError || isError) && (
         <div>Error: {(prepareError || error)?.message}</div>

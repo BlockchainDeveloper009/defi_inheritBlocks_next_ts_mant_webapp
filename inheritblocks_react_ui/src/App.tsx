@@ -22,6 +22,7 @@ import {
   getDefaultWallets,
   RainbowKitProvider,
 } from '@rainbow-me/rainbowkit';  
+import Profile from './Components/Profile';
 
 //import { createStylesServer, ServerStyles } from '@mantine/ssr';
 const yourAlchemyApiKey = '3b2s_ycI-VRJbbV-stREOv_x1w3XC5LQ';
@@ -41,8 +42,10 @@ const { connectors } = getDefaultWallets({
   chains
 });
 const client = createClient({
+  autoConnect: true,
   provider,
   webSocketProvider,
+  connectors
   
 })
 function App() {
@@ -57,6 +60,7 @@ function App() {
             <MantineProvider theme={{colorScheme}}>
               <Paper radius={0} style = {{minHeight: "100vh"}}>
               <WagmiConfig client={client}>
+                <Profile/>
                 <AppShellExample/>
                 
                 

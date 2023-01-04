@@ -37,7 +37,7 @@ function WagmiWillsForm() {
  
     return (
       <WagmiConfig client={client}>
-        <Profile/>
+       
         -------------------
         <CreateWillsForm/>
         
