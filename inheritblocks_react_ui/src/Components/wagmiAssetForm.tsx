@@ -31,13 +31,16 @@ const client = createClient({
   webSocketProvider,
   
 })
-
+//CEO, 150-200
+// meet & greet
+// 
 function WagmiAssetForm() {
 
 
     return (
       <WagmiConfig client={client}>
         
+        <Profile/>
         -------------------
 
         <CreateAssetsForm/>

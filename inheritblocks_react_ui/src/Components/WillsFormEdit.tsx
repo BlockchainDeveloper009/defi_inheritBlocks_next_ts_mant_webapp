@@ -13,13 +13,15 @@ import { useContract,
   useContractRead, useContractWrite,
    usePrepareContractWrite, useWaitForTransaction } from 'wagmi'
 //import { logWarn } from './logger'
-const yourAlchemyApiKey = '3b2s_ycI-VRJbbV-stREOv_x1w3XC5LQ';
+
 import {
  
   CreateBondandAdminRole_CONTRACT_ABI,
   CreateBondandAdminRole_CONTRACT_ADDRESS,
 } from "../srcConstants";
 import { useLocation } from "react-router-dom";
+
+const yourAlchemyApiKey = '3b2s_ycI-VRJbbV-stREOv_x1w3XC5LQ';
 
 const { provider, webSocketProvider } = configureChains(
   [polygon, goerli, polygonMumbai, localhost],
@@ -37,13 +39,15 @@ const client = createClient({
   
 })
 
-function WagmiWillsFormEdit() {
+function WillsFormEdit() {
   const { address, connector, isConnected } = useAccount()
   console.log('===RedeemButton0000000000000000000000====')
   const location = useLocation();
-  const { assetId } = location.state || { id: "none" };
-
-  console.log(assetId);
+  // const { assetId } = location.state || { assId: "none" };
+  let userId = location.state.userId.toString();
+  console.log(userId);
+  console.log('================')
+  
 
   const { 
     config,
@@ -52,18 +56,23 @@ function WagmiWillsFormEdit() {
     address: CreateBondandAdminRole_CONTRACT_ADDRESS,
     abi: CreateBondandAdminRole_CONTRACT_ABI,
     functionName: 'settleAssets',
-    args: [assetId],
-    enabled: Boolean(assetId),
+    args: [userId],
+    enabled: Boolean(userId),
   })
   console.log('===RedeemButton====')
   const { data, write , error, isError } = useContractWrite(config)
+
   const { isLoading, isSuccess } = useWaitForTransaction({
     hash: data?.hash,
   })
- 
+  console.log(data)
+  console.log(error)
+  console.log(isSuccess)
+  console.log('================')
     return (
       <WagmiConfig client={client}>
-       
+        ------------------
+     
         -------------------
       
          {isSuccess && (
@@ -91,5 +100,5 @@ function WagmiWillsFormEdit() {
     );
   }
   
-  export default WagmiWillsFormEdit;
+  export default WillsFormEdit;
   

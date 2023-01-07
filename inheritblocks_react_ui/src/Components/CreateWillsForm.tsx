@@ -87,10 +87,10 @@ function CreateWillsForm() {
   const { isLoading, isSuccess } = useWaitForTransaction({
     hash: data?.hash,
   })
-  let assets;
+  let assets:string[];
   let wills;
   assets = GetAllAssets(address)
-  if(assets.length>=0 ){
+  if(assets?.length>=0 ){
     console.log('---assets---')
     console.log(assets)
     console.log('--------------')

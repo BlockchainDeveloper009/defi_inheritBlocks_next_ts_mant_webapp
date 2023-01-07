@@ -4,7 +4,7 @@ import { IconSun, IconMoonStars } from '@tabler/icons';
 import { useState } from 'react';
 import { useForm } from '@mantine/form';
 import { TextInput, Button, Box, Code } from '@mantine/core';
-import { useContract, useContractEvent, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi'
+import { useAccount, useContract, useContractEvent, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi'
 import {
  
   CreateBondandAdminRole_CONTRACT_ABI,
@@ -70,6 +70,8 @@ function CreateAssetsForm() {
       },
     })
   }
+  const { address, connector, isConnected } = useAccount()
+  
   const { 
     config,
     error: prepareError,
@@ -84,9 +86,11 @@ function CreateAssetsForm() {
   const { isLoading, isSuccess } = useWaitForTransaction({
     hash: data?.hash,
   })
-  console.log('(((((((((')
+  console.log('---createAsset----')
+  console.log(isConnected)
+    console.log(address)
   console.log(data)
-  console.log('))))))))))')
+  console.log('--------')
   return (
     <Box sx={{ maxWidth: 400 }} mx="auto">
       <form

@@ -36,6 +36,8 @@ import WagmiAssetForm from './wagmiAssetForm';
 import WagmiWillsForm from './wagmiWillsForm';
 import { InjectedConnector } from 'wagmi/connectors/injected'
 import { useAccount, useConnect, useDisconnect } from 'wagmi';
+import WagmiWillsFormEdit from './WillsFormEdit';
+import WillsFormEdit from './WillsFormEdit';
 
 const Applicationfooter = "2022 all copyright resverved to Inherit Blocks"
 function AppShellExample() {
@@ -219,7 +221,7 @@ function AppShellExample() {
             <Route path="/ManageWillsTable" element={<ManageWillsTable/>}></Route>
             <Route path="/FormExample" element={<FormExample/>}></Route>
             <Route path="/CreateAssetsForm" element={<CreateAssetsForm/>}></Route>
-            {/* <Route path="/CreateWillsForm" element={<CreateWillsForm/>}></Route> */}
+            <Route path=":asId" element={<WillsFormEdit/>}></Route>
             
             {/* <Route path="/manageAssetsTable" element={<manageAssetsTable/>}></Route>
             <Route path="/manageWillsTable" element={<manageWillsTable/>}></Route> */}
